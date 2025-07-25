@@ -19,6 +19,7 @@ Suggested configuration:
 * Use Solarized Light as the theme.
 * Set `cmd+\`` to show and hide iTerm2 globally.
 * Set `opt+\`` to show and hide the dedicated hotkey window.
+* Import the keymap from `iterm2_keymap.itermkeymap`.
 
 ## Alfred
 
