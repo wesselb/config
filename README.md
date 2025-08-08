@@ -1,5 +1,17 @@
 # Terminal Setup
 
+Install `zsh`, [Oh My Zsh](https://ohmyz.sh/),
+and the [powerlevel10k](https://github.com/romkatv/powerlevel10k) theme.
+
+Install [Miniforge](https://conda-forge.org/download/).
+
+Install some helpful command-line tools:
+
+```bash
+brew install the_silver_searcher nload
+brew install --cask docker 
+```
+
 # Helpful macOS Applications
 
 The following applications are helpful.
@@ -27,6 +39,14 @@ Alfred is a better Spotlight with extended functionality.
 
 ```bash
 brew install alfred
+```
+
+## Dash
+
+Dash offers a plugin for Alfred to easily search documentation.
+
+```bash
+brew install dash
 ```
 
 ## Contexts
@@ -68,6 +88,15 @@ brew install bettertouchtool
 Suggested configuration:
 
 * Turn off window snapping.
+
+
+## Karabiner Elements
+
+Karabiner Elements can be used to remap keys.
+
+```bash
+brew install karabiner-elements
+```
 
 ## iStatMenus
 

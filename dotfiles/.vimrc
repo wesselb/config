@@ -2,7 +2,7 @@ set nocompatible    " Enable vim.
 set encoding=utf-8  " Set file encoding to utf-8.
 
 " Must load this in the beginning of the script!
-let g:python3_host_prog = '/usr/local/Caskroom/miniconda/base/envs/3.10/bin/python'
+let g:python3_host_prog = '/Users/wbruinsma/miniforge3/envs/3.10/bin/python'
 
 " Kill any deprecation warnings.
 if has('python3')
@@ -33,8 +33,8 @@ Plugin 'tpope/vim-surround'               " Surround motion
 Plugin 'Tabular'                          " Align text.
 Plugin 'vim-scripts/tComment'             " Comment text.
 
-Plugin 'SirVer/ultisnips'                 " Snippets
-Plugin 'honza/vim-snippets'
+" Plugin 'SirVer/ultisnips'                 " Snippets
+" Plugin 'honza/vim-snippets'
 
 Plugin 'Vimjas/vim-python-pep8-indent'    " Proper indentation for Python
 Plugin 'plasticboy/vim-markdown'          " Markdown support
@@ -105,14 +105,15 @@ nmap <Leader>w/ :vsp<CR>
 ""
 
 let g:fzf_command_prefix = 'Fzf'
-nmap <silent> <C-p> :call fzf#run({
-    \ 'source': '
-        \ python /Users/wessel/Dropbox/Projects/Development/Vim/list_files.py . 
-        \ --type py jl tex md 
-        \ --ignore-dir venv',
-    \ 'sink': 'e',
-    \ 'down': '30%'
-    \ })<CR>
+nmap <C-p> :FzfFiles<CR>
+" nmap <silent> <C-p> :call fzf#run({
+"     \ 'source': '
+"         \ python /Users/wessel/Dropbox/Projects/Development/Vim/list_files.py . 
+"         \ --type py jl tex md 
+"         \ --ignore-dir venv',
+"     \ 'sink': 'e',
+"     \ 'down': '30%'
+"     \ })<CR>
 nmap <C-b> :FzfBuffers<CR>
 
 " Maps
@@ -123,6 +124,9 @@ nmap <Leader>l :lclose<CR>
 ""
 
 au VimEnter *  NERDTree | wincmd p
+" Close if NERDTree is the last buffer. Source:
+"     https://stackoverflow.com/a/4319165
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 ""
 "" tComment
@@ -148,11 +152,6 @@ vmap <Leader>a" :Tabularize<Space>/"/l1c1l0<CR>
 " ""
 " "" Python
 " ""
-"
-" " YCM Commands
-" nmap <Leader><Leader>g :YcmCompleter<Space>GoTo<CR>
-" nmap <Leader><Leader>t :YcmCompleter<Space>GetType<CR>
-" nmap <Leader><Leader>d :YcmCompleter<Space>GetDoc<CR>
 
 " ALE
 let g:ale_fixers = {
@@ -169,12 +168,8 @@ let g:ale_linters = {
   \   ],
   \   'tex': []
   \}
-let g:ale_python_isort_executable = '/usr/local/Caskroom/miniconda/base/envs/3.9/bin/isort'
 let g:ale_python_isort_options = '--profile=black'
-let g:ale_python_black_executable = '/usr/local/Caskroom/miniconda/base/envs/3.9/bin/black'
-let g:ale_python_flake8_executable = '/usr/local/Caskroom/miniconda/base/envs/3.9/bin/flake8'
 let g:ale_python_flake8_options = '--max-line-length=88 --ignore=E203,F811,W503'
-let g:ale_python_ruff_executable = '/usr/local/Caskroom/miniconda/base/envs/3.9/bin/ruff'
 let g:ale_history_enabled=1
 nmap <Leader><Leader>f :ALEFix<CR>
 
