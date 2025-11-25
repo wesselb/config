@@ -2,7 +2,9 @@ set nocompatible    " Enable vim.
 set encoding=utf-8  " Set file encoding to utf-8.
 
 " Must load this in the beginning of the script!
-let g:python3_host_prog = '/Users/wbruinsma/miniforge3/envs/3.10/bin/python'
+if !empty($VIM_PYTHON3)
+    let g:python3_host_prog = $VIM_PYTHON3
+endif
 
 " Kill any deprecation warnings.
 if has('python3')
@@ -33,8 +35,8 @@ Plugin 'tpope/vim-surround'               " Surround motion
 Plugin 'Tabular'                          " Align text.
 Plugin 'vim-scripts/tComment'             " Comment text.
 
-" Plugin 'SirVer/ultisnips'                 " Snippets
-" Plugin 'honza/vim-snippets'
+Plugin 'SirVer/ultisnips'                 " Snippets
+Plugin 'honza/vim-snippets'
 
 Plugin 'Vimjas/vim-python-pep8-indent'    " Proper indentation for Python
 Plugin 'plasticboy/vim-markdown'          " Markdown support
@@ -149,15 +151,15 @@ nmap <Leader>a" :Tabularize<Space>/"/l1c1l0<CR>
 vmap <Leader>a" :Tabularize<Space>/"/l1c1l0<CR>
 
 
-" ""
-" "" Python
-" ""
+""
+"" Python
+""
 
 " ALE
 let g:ale_fixers = {
   \   'python': [
   \       'ruff',
-  \       'ruff_format'
+  \       'ruff_format',
   \   ],
   \   'tex': []
   \}
@@ -168,8 +170,6 @@ let g:ale_linters = {
   \   ],
   \   'tex': []
   \}
-let g:ale_python_isort_options = '--profile=black'
-let g:ale_python_flake8_options = '--max-line-length=88 --ignore=E203,F811,W503'
 let g:ale_history_enabled=1
 nmap <Leader><Leader>f :ALEFix<CR>
 
@@ -229,10 +229,10 @@ function! InsertReference(output)
     startinsert!
 endfunction
 
-nmap <silent> <Leader>lc :call fzf#run({
-    \ 'source': '/Users/wessel/Dropbox/Projects/PyLib/Catalogue/venv/bin/python /Users/wessel/Dropbox/Projects/PyLib/Catalogue/list_fzf.py',
-    \ 'sink': function('InsertReference'),
-    \ })<CR>
+" nmap <silent> <Leader>lc :call fzf#run({
+"     \ 'source': '/Users/wessel/Dropbox/Projects/PyLib/Catalogue/venv/bin/python /Users/wessel/Dropbox/Projects/PyLib/Catalogue/list_fzf.py',
+"     \ 'sink': function('InsertReference'),
+"     \ })<CR>
 
 ""
 "" UltiSnips

@@ -12,6 +12,19 @@ brew install the_silver_searcher nload
 brew install --cask docker 
 ```
 
+Install the dotfiles:
+
+```bash
+python link.py
+```
+
+Consider setting `VIM_PYTHON3` in `~/.zshrc` to point Vim to the correct
+`python3`:
+
+```bash
+export VIM_PYTHON3="$HOME/miniforge3/envs/3.12/bin/python"
+```
+
 # Helpful macOS Applications
 
 The following applications are helpful.
@@ -29,9 +42,10 @@ brew install iterm2
 Suggested configuration:
 
 * Use Solarized Light as the theme.
-* Set `cmd+\`` to show and hide iTerm2 globally.
-* Set `opt+\`` to show and hide the dedicated hotkey window.
+* Set `cmd+backtick` to show and hide iTerm2 globally.
+* Set `opt+backtick` to show and hide the dedicated hotkey window.
 * Import the keymap from `iterm2_keymap.itermkeymap`.
+* Turn off all notifications.
 
 ## Alfred
 
@@ -60,7 +74,7 @@ brew install contexts
 Suggested configuration:
 
 * Turn off sidebar enhancement.
-* Turn off `cmd+\`` switcher to avoid interference with iTerm2.
+* Turn off `cmd+backtick` switcher to avoid interference with iTerm2.
 * Rebind Spotlight to `ctrl+space`.
 * Bind `cmd+space` to show the application switcher.
 
