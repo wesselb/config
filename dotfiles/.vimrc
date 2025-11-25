@@ -170,6 +170,7 @@ let g:ale_linters = {
   \   ],
   \   'tex': []
   \}
+let g:ale_python_ruff_options = '--select I'  " Always sort imports.
 let g:ale_history_enabled=1
 nmap <Leader><Leader>f :ALEFix<CR>
 
