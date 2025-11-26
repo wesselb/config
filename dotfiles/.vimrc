@@ -1,14 +1,10 @@
 set nocompatible    " Enable vim.
 set encoding=utf-8  " Set file encoding to utf-8.
 
-" Must load this in the beginning of the script!
 if !empty($VIM_PYTHON3)
     let g:python3_host_prog = $VIM_PYTHON3
-endif
-
-" Kill any deprecation warnings.
-if has('python3')
-    silent! python3 1
+else
+    echoerr 'Please set $VIM_PYTHON3.'
 endif
 
 filetype off  " Temporarily required for Vundle.
@@ -247,3 +243,4 @@ function! Dedent(timer)
 endfunction
 
 syntax on
+
