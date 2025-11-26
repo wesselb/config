@@ -242,5 +242,42 @@ function! Dedent(timer)
     startinsert!
 endfunction
 
-syntax on
+""
+"" TODO Organisation
+""
 
+function! OrganiseTODOs()
+    if empty($VIM_TODO_PY)
+        echoerr 'Please set $VIM_TODO_PY.'
+        return
+    endif
+
+    update
+    let l:filepath = expand('%:p')
+    if empty(l:filepath)
+        echoerr "Buffer has no file path."
+        return
+    endif
+
+    let l:full_command = $VIM_TODO_PY . ' ' . shellescape(l:filepath)
+    let l:output = system(l:full_command)
+
+    if v:shell_error == 0
+        let l:view = winsaveview()
+        silent! %delete _
+        call setline(1, split(l:output, "\n"))
+        call winrestview(l:view)
+        redraw
+        update
+        echo "TODOs organised."
+    else
+        redraw
+        echohl ErrorMsg
+        echo l:output
+        echohl None
+    endif
+endfunction
+
+nmap <Leader>t :call<Space>OrganiseTODOs()<CR>
+
+syntax on
