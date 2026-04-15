@@ -29,6 +29,31 @@ The following are useful command-line tools:
 brew install the_silver_searcher
 ```
 
+Install `zsh`, [Oh My Zsh](https://ohmyz.sh/),
+and the [powerlevel10k](https://github.com/romkatv/powerlevel10k) theme.
+
+Install [Miniforge](https://conda-forge.org/download/).
+
+Install some helpful command-line tools:
+
+```bash
+brew install the_silver_searcher nload
+brew install --cask docker 
+```
+
+Install the dotfiles:
+
+```bash
+python link.py
+```
+
+Consider setting `VIM_PYTHON3` in `~/.zshrc` to point Vim to the correct
+`python3`:
+
+```bash
+export VIM_PYTHON3="$HOME/miniforge3/envs/3.12/bin/python"
+```
+
 # Helpful macOS Applications
 
 The following applications are helpful.
@@ -65,9 +90,17 @@ Suggested configuration:
 * Bind `cmd+space` to show Alfred.
 * You might want to install the currency conversion workflow.
 
+## Dash
+
+Dash offers a plugin for Alfred to easily search documentation.
+
+```bash
+brew install dash
+```
+
 ## Contexts
 
-Contexts is a better window switcher.
+Contexts is a better `cmd+tab`.
 
 ```bash
 brew install contexts
@@ -103,6 +136,15 @@ Suggested configuration:
 
 * Turn off window snapping.
 
+
+## Karabiner Elements
+
+Karabiner Elements can be used to remap keys.
+
+```bash
+brew install karabiner-elements
+```
+
 ## iStatMenus
 
 iStatMenus provides handy icons in the top bar that help you monitor your Mac.
@@ -121,13 +163,4 @@ Suggested configuration:
 
 ```bash
 brew install 1password
-```
-
-## Dash
-
-Dash is a tool to search docsets.
-It works well with Alfred.
-
-```bash
-brew install dash
 ```

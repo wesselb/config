@@ -1,12 +1,10 @@
 set nocompatible    " Enable vim.
 set encoding=utf-8  " Set file encoding to utf-8.
 
-" Must load this in the beginning of the script!
-let g:python3_host_prog = '/usr/local/Caskroom/miniconda/base/envs/3.10/bin/python'
-
-" Kill any deprecation warnings.
-if has('python3')
-    silent! python3 1
+if !empty($VIM_PYTHON3)
+    let g:python3_host_prog = $VIM_PYTHON3
+else
+    echoerr 'Please set $VIM_PYTHON3.'
 endif
 
 filetype off  " Temporarily required for Vundle.
@@ -105,14 +103,15 @@ nmap <Leader>w/ :vsp<CR>
 ""
 
 let g:fzf_command_prefix = 'Fzf'
-nmap <silent> <C-p> :call fzf#run({
-    \ 'source': '
-        \ python /Users/wessel/Dropbox/Projects/Development/Vim/list_files.py . 
-        \ --type py jl tex md 
-        \ --ignore-dir venv',
-    \ 'sink': 'e',
-    \ 'down': '30%'
-    \ })<CR>
+nmap <C-p> :FzfFiles<CR>
+" nmap <silent> <C-p> :call fzf#run({
+"     \ 'source': '
+"         \ python /Users/wessel/Dropbox/Projects/Development/Vim/list_files.py . 
+"         \ --type py jl tex md 
+"         \ --ignore-dir venv',
+"     \ 'sink': 'e',
+"     \ 'down': '30%'
+"     \ })<CR>
 nmap <C-b> :FzfBuffers<CR>
 
 " Maps
@@ -123,6 +122,9 @@ nmap <Leader>l :lclose<CR>
 ""
 
 au VimEnter *  NERDTree | wincmd p
+" Close if NERDTree is the last buffer. Source:
+"     https://stackoverflow.com/a/4319165
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 ""
 "" tComment
@@ -145,20 +147,15 @@ nmap <Leader>a" :Tabularize<Space>/"/l1c1l0<CR>
 vmap <Leader>a" :Tabularize<Space>/"/l1c1l0<CR>
 
 
-" ""
-" "" Python
-" ""
-"
-" " YCM Commands
-" nmap <Leader><Leader>g :YcmCompleter<Space>GoTo<CR>
-" nmap <Leader><Leader>t :YcmCompleter<Space>GetType<CR>
-" nmap <Leader><Leader>d :YcmCompleter<Space>GetDoc<CR>
+""
+"" Python
+""
 
 " ALE
 let g:ale_fixers = {
   \   'python': [
   \       'ruff',
-  \       'ruff_format'
+  \       'ruff_format',
   \   ],
   \   'tex': []
   \}
@@ -169,12 +166,7 @@ let g:ale_linters = {
   \   ],
   \   'tex': []
   \}
-let g:ale_python_isort_executable = '/usr/local/Caskroom/miniconda/base/envs/3.9/bin/isort'
-let g:ale_python_isort_options = '--profile=black'
-let g:ale_python_black_executable = '/usr/local/Caskroom/miniconda/base/envs/3.9/bin/black'
-let g:ale_python_flake8_executable = '/usr/local/Caskroom/miniconda/base/envs/3.9/bin/flake8'
-let g:ale_python_flake8_options = '--max-line-length=88 --ignore=E203,F811,W503'
-let g:ale_python_ruff_executable = '/usr/local/Caskroom/miniconda/base/envs/3.9/bin/ruff'
+let g:ale_python_ruff_options = '--select I'  " Always sort imports.
 let g:ale_history_enabled=1
 nmap <Leader><Leader>f :ALEFix<CR>
 
@@ -234,10 +226,10 @@ function! InsertReference(output)
     startinsert!
 endfunction
 
-nmap <silent> <Leader>lc :call fzf#run({
-    \ 'source': '/Users/wessel/Dropbox/Projects/PyLib/Catalogue/venv/bin/python /Users/wessel/Dropbox/Projects/PyLib/Catalogue/list_fzf.py',
-    \ 'sink': function('InsertReference'),
-    \ })<CR>
+" nmap <silent> <Leader>lc :call fzf#run({
+"     \ 'source': '/Users/wessel/Dropbox/Projects/PyLib/Catalogue/venv/bin/python /Users/wessel/Dropbox/Projects/PyLib/Catalogue/list_fzf.py',
+"     \ 'sink': function('InsertReference'),
+"     \ })<CR>
 
 ""
 "" UltiSnips
@@ -249,5 +241,43 @@ function! Dedent(timer)
     execute "normal! <<a"
     startinsert!
 endfunction
+
+""
+"" TODO Organisation
+""
+
+function! OrganiseTODOs()
+    if empty($VIM_TODO_PY)
+        echoerr 'Please set $VIM_TODO_PY.'
+        return
+    endif
+
+    update
+    let l:filepath = expand('%:p')
+    if empty(l:filepath)
+        echoerr "Buffer has no file path."
+        return
+    endif
+
+    let l:full_command = $VIM_TODO_PY . ' ' . shellescape(l:filepath)
+    let l:output = system(l:full_command)
+
+    if v:shell_error == 0
+        let l:view = winsaveview()
+        silent! %delete _
+        call setline(1, split(l:output, "\n"))
+        call winrestview(l:view)
+        redraw
+        update
+        echo "TODOs organised."
+    else
+        redraw
+        echohl ErrorMsg
+        echo l:output
+        echohl None
+    endif
+endfunction
+
+nmap <Leader>t :call<Space>OrganiseTODOs()<CR>
 
 syntax on
