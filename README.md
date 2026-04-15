@@ -1,4 +1,33 @@
-# Terminal Setup
+# Terminal Setup on macOS
+
+Use `uv` to manage Python:
+
+```bash
+brew install uv
+uv python install 3.12 --default
+uv python update-shell
+```
+
+`uv` can also install tools system-wide:
+
+```bash
+uv tool install ruff
+uv tool install pipx
+```
+
+`zsh` with `starship` gives a very decent defaults:
+
+```bash
+brew install starship
+brew install zsh-autosuggestions zsh-syntax-highlighting
+brew install --cask font-fira-code-nerd-font font-jetbrains-mono-nerd-font
+```
+
+The following are useful command-line tools:
+
+```bash
+brew install the_silver_searcher
+```
 
 # Helpful macOS Applications
 
@@ -19,7 +48,9 @@ Suggested configuration:
 * Use Solarized Light as the theme.
 * Set `cmd+\`` to show and hide iTerm2 globally.
 * Set `opt+\`` to show and hide the dedicated hotkey window.
-* Import the keymap from `iterm2_keymap.itermkeymap`.
+* For every profile, use `Keys > Key Bindings > Presets > Natural Text Editing`.
+* For every profile, select a Nerd Front.
+* You might want to tweak your shortcuts for opening panes and moving between tabs and panes.
 
 ## Alfred
 
@@ -28,6 +59,11 @@ Alfred is a better Spotlight with extended functionality.
 ```bash
 brew install alfred
 ```
+
+Suggested configuration:
+
+* Bind `cmd+space` to show Alfred.
+* You might want to install the currency conversion workflow.
 
 ## Contexts
 
@@ -41,8 +77,6 @@ Suggested configuration:
 
 * Turn off sidebar enhancement.
 * Turn off `cmd+\`` switcher to avoid interference with iTerm2.
-* Rebind Spotlight to `ctrl+space`.
-* Bind `cmd+space` to show the application switcher.
 
 ## Moom
 
@@ -79,17 +113,7 @@ brew install istat-menus
 
 Suggested configuration:
 
-* Turn off everything except CPU and GPU, network, and the combined menu.
-
-## Flux
-
-Flux adjust the color temperature of your screen in the evening to reduce eye strain.
-
-```bash
-brew install flux-app
-```
-
-No suggested configuration.
+* Turn off everything except the combined menu.
 
 ## 1Password
 
@@ -99,8 +123,11 @@ No suggested configuration.
 brew install 1password
 ```
 
-No suggested configuration.
+## Dash
 
-## QuickLook Extensions
+Dash is a tool to search docsets.
+It works well with Alfred.
 
-Alternative?
+```bash
+brew install dash
+```
