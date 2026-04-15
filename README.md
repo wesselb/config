@@ -20,21 +20,10 @@ uv tool install pipx
 ```bash
 brew install starship
 brew install zsh-autosuggestions zsh-syntax-highlighting
-brew install --cask font-fira-code-nerd-font font-jetbrains-mono-nerd-font
+brew install --cask font-jetbrains-mono-nerd-font
 ```
 
 The following are useful command-line tools:
-
-```bash
-brew install the_silver_searcher
-```
-
-Install `zsh`, [Oh My Zsh](https://ohmyz.sh/),
-and the [powerlevel10k](https://github.com/romkatv/powerlevel10k) theme.
-
-Install [Miniforge](https://conda-forge.org/download/).
-
-Install some helpful command-line tools:
 
 ```bash
 brew install the_silver_searcher nload
@@ -45,13 +34,6 @@ Install the dotfiles:
 
 ```bash
 python link.py
-```
-
-Consider setting `VIM_PYTHON3` in `~/.zshrc` to point Vim to the correct
-`python3`:
-
-```bash
-export VIM_PYTHON3="$HOME/miniforge3/envs/3.12/bin/python"
 ```
 
 # Helpful macOS Applications
