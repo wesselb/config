@@ -53,8 +53,8 @@ brew install iterm2
 Suggested configuration:
 
 * Use Solarized Light as the theme.
-* Set `cmd+\`` to show and hide iTerm2 globally.
-* Set `opt+\`` to show and hide the dedicated hotkey window.
+* Set `cmd+backtick` to show and hide iTerm2 globally.
+* Set `opt+backtick` to show and hide the dedicated hotkey window.
 * For every profile, use `Keys > Key Bindings > Presets > Natural Text Editing`.
 * For every profile, select a Nerd Front.
 * You might want to tweak your shortcuts for opening panes and moving between tabs and panes.
@@ -91,7 +91,7 @@ brew install contexts
 Suggested configuration:
 
 * Turn off sidebar enhancement.
-* Turn off `cmd+\`` switcher to avoid interference with iTerm2.
+* Turn off `cmd+backtick` switcher to avoid interference with iTerm2.
 
 ## Moom
 
